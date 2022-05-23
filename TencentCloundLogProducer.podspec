@@ -46,7 +46,8 @@ Pod::Spec.new do |s|
 }
 
   s.author             = { "herrylv" => "herrylv@tencent.com" }
-  s.source       = { :git => "https://git.woa.com/cls_team/tencentcloud-cls-sdk-ios.git", :tag => s.version.to_s  }
+#  s.source       = { :git => "https://git.woa.com/cls_team/tencentcloud-cls-sdk-ios.git", :tag => s.version.to_s  }
+  s.source       = { :git => "https://github.com/TencentCloud/tencentcloud-cls-demo.git", :tag => s.version.to_s  }
   s.social_media_url = 'http://t.cn/AiRpol8C'
   s.ios.deployment_target = '9.0'
   s.default_subspec = 'Core'
