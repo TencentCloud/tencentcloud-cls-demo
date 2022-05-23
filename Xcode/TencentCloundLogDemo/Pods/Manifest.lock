@@ -1,0 +1,16 @@
+PODS:
+  - TencentCloundLogProducer/Core (0.1.0)
+
+DEPENDENCIES:
+  - TencentCloundLogProducer/Core (from `../../`)
+
+EXTERNAL SOURCES:
+  TencentCloundLogProducer:
+    :path: "../../"
+
+SPEC CHECKSUMS:
+  TencentCloundLogProducer: feb4d1193884880926c892a0b82a1be5e3d49523
+
+PODFILE CHECKSUM: 35849fce829ffb58005ef9809ac55222486c1121
+
+COCOAPODS: 1.11.3

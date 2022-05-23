@@ -1,0 +1,7 @@
+{
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "log_producer_config.h": "c",
+        "__locale": "c"
+    }
+}
