@@ -65,12 +65,13 @@ Pod::Spec.new do |s|
           'TencentCloundLogProducer/TencentCloundLogProducer/*.h',
           'TencentCloundLogProducer/TencentCloundLogProducer/utils/*.h',
           'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_define.h',
-          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_http_interface.h',
-          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_inner_include.h',
-          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_multi_thread.h',
-          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_producer_client.h',
-          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_producer_common.h',
-          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_producer_config.h'
+          'TencentCloundLogProducer/tencentclound-log-c-sdk/src*.h'
+#          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_http_interface.h',
+#          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_inner_include.h',
+#          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_multi_thread.h',
+#          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_producer_client.h',
+#          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_producer_common.h',
+#          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_producer_config.h'
 
   end
 end
