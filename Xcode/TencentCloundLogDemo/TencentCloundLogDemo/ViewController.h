@@ -2,7 +2,7 @@
 #import <UIKit/UIKit.h>
 #import <TencentCloundLogProducer/TencentCloundLogProducer.h>
 #import "PrefixHeader.pch"
-#import "DemoUtils.h"
+#import "UtilInfo.h"
 
 @interface ViewController : UIViewController
 

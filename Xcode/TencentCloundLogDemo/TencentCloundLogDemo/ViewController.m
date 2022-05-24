@@ -1,6 +1,6 @@
 
 #import "ViewController.h"
-#import "DemoUtils.h"
+#import "UtilInfo.h"
 
 @interface ViewController ()
 
@@ -9,7 +9,6 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
-    CLSLogV(@"调用viewDidLoad");
     [super viewDidLoad];
 }
 

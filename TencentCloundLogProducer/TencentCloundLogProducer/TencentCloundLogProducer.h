@@ -31,17 +31,3 @@ FOUNDATION_EXPORT const unsigned char TencentCloundLogLogProducerVersionString[]
 #import "Log.h"
 #import "TimeUtils.h"
 
-#if __has_include("LogProducerClient+Bricks.h")
-#import "LogProducerClient+Bricks.h"
-#import "CLSAdapter.h"
-#import "CLSConfig.h"
-#import "TCData.h"
-#import "IPlugin.h"
-#endif
-
-#if __has_include(<TencentCloundLogProducer/CLSCrashReporterPlugin.h>)
-#import "CLSCrashReporterPlugin.h"
-#import "IReporterSender.h"
-#import "IFileParser.h"
-#endif
-

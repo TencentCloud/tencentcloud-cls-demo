@@ -1,6 +1,6 @@
 
 #import "AppDelegate.h"
-#import "DemoUtils.h"
+#import "UtilInfo.h"
 #import "MainViewController.h"
 
 #import <TencentCloundLogProducer/TencentCloundLogProducer.h>
@@ -12,14 +12,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
     self.window=[[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
 
     MainViewController *viewController = [[MainViewController alloc] init];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    [navigationController.navigationBar setBarTintColor:[UIColor blueColor]];
-    navigationController.view.tintColor = [UIColor whiteColor];
+    [navigationController.navigationBar setBarTintColor:[UIColor greenColor]];
+    navigationController.view.tintColor = [UIColor greenColor];
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
 

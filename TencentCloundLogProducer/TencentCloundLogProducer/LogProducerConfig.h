@@ -7,26 +7,24 @@
 #endif /* LogProducerConfig_h */
 
 #import "log_producer_config.h"
-#import "log_http_interface.h"
+#import "log_adaptor.h"
 
 
 @interface LogProducerConfig : NSObject
 {
-    @package log_producer_config* config;
+    @package ProducerConfig* config;
     @private NSString *endpoint;
-    @private NSString *project;
-    @private NSString *logstore;
 }
 
-- (id) initWithEndpoint:(NSString *) endpoint accessKeyID:(NSString *)accessKeyID accessKeySecret:(NSString *)accessKeySecret;
+- (id) initWithCoreInfo:(NSString *) endpoint accessKeyID:(NSString *)accessKeyID accessKeySecret:(NSString *)accessKeySecret;
 
 - (void)SetTopic:(NSString *) topic;
 
-- (void)SetPacketLogBytes:(int) num;
+- (void)SetPackageLogBytes:(int) num;
 
-- (void)SetPacketLogCount:(int) num;
+- (void)SetPackageLogCount:(int) num;
 
-- (void)SetPacketTimeout:(int) num;
+- (void)SetPackageTimeout:(int) num;
 
 - (void)SetMaxBufferLimit:(int) num;
 
@@ -41,10 +39,6 @@
 - (void)SetDestroySenderWaitSec:(int) num;
 
 - (void)SetCompressType:(int) num;
-
-- (int)IsValid;
-
-- (int)IsEnabled;
 
 - (void) setEndpoint: (NSString *)endpoint;
 

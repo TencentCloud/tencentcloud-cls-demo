@@ -80,7 +80,7 @@ struct  _Cls__LogGroup
   /*
    * 多条日志合成的日志数组
    */
-  size_t n_logs;
+  size_t logs_count;
   Cls__Log **logs;
   /*
    * 目前暂无效用

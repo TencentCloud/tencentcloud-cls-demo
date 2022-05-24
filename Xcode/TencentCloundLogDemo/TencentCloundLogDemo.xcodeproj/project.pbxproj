@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		99481885283CB6350015EA53 /* UtilInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 99481884283CB6350015EA53 /* UtilInfo.m */; };
 		997685412826442C0067EEA2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 997685402826442C0067EEA2 /* AppDelegate.m */; };
 		997685442826442C0067EEA2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 997685432826442C0067EEA2 /* SceneDelegate.m */; };
 		997685472826442C0067EEA2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997685462826442C0067EEA2 /* ViewController.m */; };
@@ -15,7 +16,6 @@
 		997685522826442D0067EEA2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 997685512826442D0067EEA2 /* main.m */; };
 		99768566282648590067EEA2 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99768565282648590067EEA2 /* MainViewController.m */; };
 		99768569282648BB0067EEA2 /* ExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99768568282648BB0067EEA2 /* ExampleViewController.m */; };
-		9976856C282648F50067EEA2 /* DemoUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9976856B282648F50067EEA2 /* DemoUtils.m */; };
 		9976858128264AA80067EEA2 /* ProducerExampleDestroyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9976857228264AA80067EEA2 /* ProducerExampleDestroyController.m */; };
 		9976858228264AA80067EEA2 /* ProducerExampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9976857328264AA80067EEA2 /* ProducerExampleController.m */; };
 		9976858A28264EBA0067EEA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9976858928264EB90067EEA2 /* Assets.xcassets */; };
@@ -27,6 +27,8 @@
 /* Begin PBXFileReference section */
 		66F9E4196D10F19AB6AB1347 /* Pods_TencentCloundLogDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TencentCloundLogDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BF8731F6FCBABA9A9D78AFE /* Pods-TencentCloundLogDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TencentCloundLogDemo.debug.xcconfig"; path = "Target Support Files/Pods-TencentCloundLogDemo/Pods-TencentCloundLogDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		99481883283CB6350015EA53 /* UtilInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UtilInfo.h; sourceTree = "<group>"; };
+		99481884283CB6350015EA53 /* UtilInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UtilInfo.m; sourceTree = "<group>"; };
 		9976853C2826442C0067EEA2 /* TencentCloundLogDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TencentCloundLogDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9976853F2826442C0067EEA2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		997685402826442C0067EEA2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -43,8 +45,6 @@
 		99768565282648590067EEA2 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		99768567282648BB0067EEA2 /* ExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExampleViewController.h; sourceTree = "<group>"; };
 		99768568282648BB0067EEA2 /* ExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleViewController.m; sourceTree = "<group>"; };
-		9976856A282648F50067EEA2 /* DemoUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoUtils.h; sourceTree = "<group>"; };
-		9976856B282648F50067EEA2 /* DemoUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUtils.m; sourceTree = "<group>"; };
 		9976856D282649EB0067EEA2 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		9976857228264AA80067EEA2 /* ProducerExampleDestroyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProducerExampleDestroyController.m; sourceTree = "<group>"; };
 		9976857328264AA80067EEA2 /* ProducerExampleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProducerExampleController.m; sourceTree = "<group>"; };
@@ -125,8 +125,8 @@
 				997685512826442D0067EEA2 /* main.m */,
 				99768567282648BB0067EEA2 /* ExampleViewController.h */,
 				99768568282648BB0067EEA2 /* ExampleViewController.m */,
-				9976856A282648F50067EEA2 /* DemoUtils.h */,
-				9976856B282648F50067EEA2 /* DemoUtils.m */,
+				99481883283CB6350015EA53 /* UtilInfo.h */,
+				99481884283CB6350015EA53 /* UtilInfo.m */,
 			);
 			path = TencentCloundLogDemo;
 			sourceTree = "<group>";
@@ -278,10 +278,10 @@
 				997685472826442C0067EEA2 /* ViewController.m in Sources */,
 				997685412826442C0067EEA2 /* AppDelegate.m in Sources */,
 				997685522826442D0067EEA2 /* main.m in Sources */,
-				9976856C282648F50067EEA2 /* DemoUtils.m in Sources */,
 				9976858228264AA80067EEA2 /* ProducerExampleController.m in Sources */,
 				99768569282648BB0067EEA2 /* ExampleViewController.m in Sources */,
 				99768566282648590067EEA2 /* MainViewController.m in Sources */,
+				99481885283CB6350015EA53 /* UtilInfo.m in Sources */,
 				997685442826442C0067EEA2 /* SceneDelegate.m in Sources */,
 				9976858128264AA80067EEA2 /* ProducerExampleDestroyController.m in Sources */,
 			);

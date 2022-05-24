@@ -14,18 +14,18 @@
 
 @implementation LogProducerClient
 
-- (id) initWithLogProducerConfig:(LogProducerConfig *)logProducerConfig
+- (id) initWithClsLogProducer:(LogProducerConfig *)logProducerConfig
 {
-    return [self initWithLogProducerConfig:logProducerConfig callback:nil];
+    return [self initWithClsLogProducer:logProducerConfig callback:nil];
 }
 
-- (id) initWithLogProducerConfig:(LogProducerConfig *)logProducerConfig callback:(on_log_producer_send_done_function)callback
+- (id) initWithClsLogProducer:(LogProducerConfig *)logProducerConfig callback:(SendCallBackFunc)callback
 {
     if (self = [super init])
     {
-        log_producer_env_init(LOG_GLOBAL_ALL);
-        self->producer = create_log_producer(logProducerConfig->config, *callback, nil);
-        self->client = get_log_producer_client(self->producer, nil);
+         ClsLogProducerInit(LOG_GLOBAL_ALL);
+        self->producer = ConstructorClsLogProducer(logProducerConfig->config, *callback, nil);
+        self->client = GetClsLogProducer(self->producer, nil);
         enable = YES;
     }
 
@@ -38,16 +38,16 @@
         return;
     }
     enable = NO;
-    destroy_log_producer(self->producer);
-    log_producer_env_destroy();
+    DestructorClsLogProducer(self->producer);
+    ClsLogProducerDestroy();
 }
 
-- (LogProducerResult)AddLog:(Log *) log
+- (LogProducerResult)PostLog:(Log *) log
 {
-    return [self AddLog:log flush:0];
+    return [self PostLog:log flush:0];
 }
 
-- (LogProducerResult)AddLog:(Log *) log flush:(int) flush
+- (LogProducerResult)PostLog:(Log *) log flush:(int) flush
 {
     if (!enable || self->client == NULL || log == nil) {
         return LogProducerInvalid;
@@ -77,7 +77,7 @@
         
         ids = ids + 1;
     }
-    log_producer_result res = log_producer_client_add_log_with_len_time_int32(self->client, log->logTime, pairCount, keyArray, keyCountArray, valueArray, valueCountArray, flush);
+    int res = PostClsLog(self->client, log->logTime, pairCount, keyArray, keyCountArray, valueArray, valueCountArray, flush);
     
     for(int i=0;i<pairCount;i++) {
         free(keyArray[i]);

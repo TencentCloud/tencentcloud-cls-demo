@@ -17,7 +17,7 @@
   },
   "social_media_url": "http://t.cn/AiRpol8C",
   "platforms": {
-    "ios": "9.0"
+    "ios": "8.0"
   },
   "default_subspecs": "Core",
   "subspecs": [
@@ -39,11 +39,12 @@
         "TencentCloundLogProducer/TencentCloundLogProducer/*.h",
         "TencentCloundLogProducer/TencentCloundLogProducer/utils/*.h",
         "TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_define.h",
-        "TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_http_interface.h",
+        "TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_adaptor.h",
         "TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_inner_include.h",
         "TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_multi_thread.h",
         "TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_producer_client.h",
-        "TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_producer_common.h",
+        "TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_error.h",
+        "TencentCloundLogProducer/tencentclound-log-c-sdk/src/ProducerConfig.h",
         "TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_producer_config.h"
       ]
     }

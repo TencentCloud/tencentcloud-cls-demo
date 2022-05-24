@@ -17,44 +17,68 @@
 
 ![image-20220520153540004](/Users/herrylv/Library/Application Support/typora-user-images/image-20220520153540004.png)
 
-## Podfile
-```
-待补充
-```
+## oc 配置说明
 
-## 配置说明
-
-| 参数                     | 说明                                                         | 取值                                                         |
-| ------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| connect_timeout_sec      | 网络连接超时时间                                             | 整数，单位秒，默认为10                                       |
-| send_timeout_sec         | 日志发送超时时间                                             | 整数，单位秒，默认为15                                       |
-| destroy_flusher_wait_sec | flusher线程销毁最大等待时间                                  | 整数，单位秒，默认为1                                        |
-| destroy_sender_wait_sec  | sender线程池销毁最大等待时间                                 | 整数，单位秒，默认为1                                        |
-| compress_type            | 数据上传时的压缩类型，默认为LZ4压缩                          | 0 不压缩，1 LZ4压缩， 默认为1                                |
-| ntp_time_offset          | 设备时间与标准时间之差，值为标准时间-设备时间，一般此种情况用户客户端设备时间不同步的场景 | 整数，单位秒，默认为0；比如当前设备时间为1607064208, 标准时间为1607064308，则值设置为 1607064308 - 1607064208 = 100 |
-| max_log_delay_time       | 日志时间与本机时间之差，超过该大小后会根据 `drop_delay_log` 选项进行处理。一般此种情况只会在设置persistent的情况下出现，即设备下线后，超过几天/数月启动，发送退出前未发出的日志 | 整数，单位秒，默认为7*24*3600，即7天                         |
-| drop_delay_log           | 对于超过 `max_log_delay_time` 日志的处理策略                 | 0 不丢弃，把日志时间修改为当前时间; 1 丢弃，默认为 1 （丢弃） |
-| drop_unauthorized_log    | 是否丢弃鉴权失败的日志，0 不丢弃，1丢弃                      | 整数，默认为 0，即不丢弃                                     |
+### import
 
 ```
-
+#import <TencentCloundLogProducer/TencentCloundLogProducer.h>
 ```
 
-### 创建config
-
-https://help.aliyun.com/document_detail/29064.html
+### Podfile
 
 ```
-// endpoint前需要加 https://
+pod 'TencentCloundLogProducer'
+```
+
+### 配置
+
+| 参数                         | 说明                                                         |                             取值                             |
+| ---------------------------- | ------------------------------------------------------------ | :----------------------------------------------------------: |
+| topic                        | 日志主题 ID ，通过接口SetTopic设置                           | 可在控制台获取https://console.cloud.tencent.com/cls/logset/desc |
+| accessKeyId                  | 通过接口setAccessKeyId设置                                   | 参考官网文档：https://cloud.tencent.com/document/product/614/12445 |
+| accessKey                    | 通过接口setAccessKeySecret设置                               | 参考官网文档：https://cloud.tencent.com/document/product/614/12445 |
+| endpoint                     | 地域信息。通过接口setEndpoint设置，                          | 参考官方文档：https://cloud.tencent.com/document/product/614/18940 |
+| logBytesPerPackage           | 缓存的日志包的大小上限，取值为1~5242880，单位为字节。默认为1024 * 1024。通过SetPackageLogBytes接口设置 |                        整数，单位字节                        |
+| logCountPerPackage           | 缓存的日志包中包含日志数量的最大值，取值为1~10000，默认为1024条。通过SetPackageLogCount接口设置 |                             整数                             |
+| packageTimeoutInMS           | 日志的发送逗留时间，如果缓存超时，则会被立即发送，单位为毫秒，默认为3000。通过SetPackageTimeout接口设置 |                        整数，单位毫秒                        |
+| maxBufferBytes               | 单个Producer Client实例可以使用的内存的上限，超出缓存时add_log接口会立即返回失败。通过接口SetMaxBufferLimit设置 |                        整数，单位字节                        |
+| sendThreadCount              | 发送线程数，默认为1。通过接口SetSendThreadCount设置          |                             整数                             |
+| connectTimeoutSec            | 网络连接超时时间，默认为10s。通过接口SetConnectTimeoutSec设置 |                         整数，单位秒                         |
+| sendTimeoutSec               | 读写超时，默认为15s。通过接口SetSendTimeoutSec设置           |                         整数，单位秒                         |
+| destroyFlusherWaitTimeoutSec | flusher线程销毁最大等待时间，默认为1s。通过接口SetDestroyFlusherWaitSec设置 |                         整数，单位秒                         |
+| destroySenderWaitTimeoutSec  | sender线程池销毁最大等待时间，默认为1s。通过接口SetDestroySenderWaitSec设置 |                         整数，单位秒                         |
+| compressType                 | 数据上传时的压缩类型，默认为LZ4压缩，默认为1s。通过接口SetCompressType设置 |                0 不压缩，1 LZ4压缩， 默认为1                 |
+
+
+
+## 使用demo
+
+
+```objective-c
 NSString* endpoint = @"project's_endpoint";
-NSString* project = @"project_name";
-NSString* logstore = @"logstore_name";
 NSString* accesskeyid = @"your_accesskey_id";
 NSString* accesskeysecret = @"your_accesskey_secret";
+NSString* topic_id = @"your_topic";
 
-LogProducerConfig* config = [[LogProducerConfig alloc] initWithEndpoint:endpoint project:project logstore:logstore accessKeyID:accesskeyid accessKeySecret:accesskeysecret];
-// 指定sts token 创建config，过期之前调用ResetSecurityToken重置token
-// LogProducerConfig* config = [[LogProducerConfig alloc] initWithEndpoint:endpoint project:project logstore:logstore accessKeyID:accesskeyid accessKeySecret:accesskeysecret securityToken:securityToken];
+    LogProducerConfig *config = [[LogProducerConfig alloc] initWithCoreInfo:[utils endpoint] accessKeyID:[utils accessKeyId] accessKeySecret:[utils accessKeySecret]];
+    [_config SetTopic:utils.topic];
+    [_config SetPackageLogBytes:1024*1024];
+    [_config SetPackageLogCount:1024];
+    [_config SetPackageTimeout:3000];
+    [_config SetMaxBufferLimit:64*1024*1024];
+    [_config SetSendThreadCount:1];
+    [_config SetConnectTimeoutSec:10];
+    [_config SetSendTimeoutSec:10];
+    [_config SetDestroyFlusherWaitSec:1];
+    [_config SetDestroySenderWaitSec:1];
+    [_config SetCompressType:1];
+		
+		//callback若传入空则不会回调
+    LogProducerClient *client; = [[LogProducerClient alloc] initWithClsLogProducer:_config callback:log_send_callback];
+		Log* log = [[Log alloc] init];
+    [log PutContent:@"cls_key_1" value:@"cls_value_1"];
+    [log PutContent:@"cls_key_1" value:@"cls_value_2"];
+		//flush 1代表立即发送，不设置时默认为0
+    LogProducerResult result = [client PostLog:log flush:0];
 ```
-
-### 配置config & 创建client

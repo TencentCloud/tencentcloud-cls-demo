@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "LogProducerConfig.h"
-#import "inner_log.h"
+#import "cls_log.h"
 #import "TimeUtils.h"
-#import "HttpConfigProxy.h"
 
 
 @interface LogProducerConfig ()
@@ -19,16 +18,16 @@
 
 @implementation LogProducerConfig
 
-- (id) initWithEndpoint:(NSString *) endpoint accessKeyID:(NSString *)accessKeyID accessKeySecret:(NSString *)accessKeySecret
+- (id) initWithCoreInfo:(NSString *) endpoint accessKeyID:(NSString *)accessKeyID accessKeySecret:(NSString *)accessKeySecret
 {
     if (self = [super init])
     {
-        self->config = create_log_producer_config();
-        log_producer_config_set_packet_timeout(self->config, 3000);
-        log_producer_config_set_packet_log_count(self->config, 1024);
-        log_producer_config_set_packet_log_bytes(self->config, 1024*1024);
-        log_producer_config_set_send_thread_count(self->config, 1);
-        log_set_get_time_unix_func(time_func);
+        self->config = ConstructLogConfig();
+        setPackageTimeout(self->config, 3000);
+        SetLogCountLimit(self->config, 1024);
+        SetPackageLogBytes(self->config, 1024*1024);
+        set_send_thread_count(self->config, 1);
+        SetTimeUnixFunc(time_func);
 
         [self setEndpoint:endpoint];
         [self setAccessKeyId:accessKeyID];
@@ -46,7 +45,7 @@ unsigned int time_func() {
 - (void)setEndpoint:(NSString *)endpoint
 {
     self->endpoint = endpoint;
-    log_producer_config_set_endpoint(self->config, [endpoint UTF8String]);
+    SetEndpoint(self->config, [endpoint UTF8String]);
 }
 
 - (NSString *)getEndpoint
@@ -57,77 +56,72 @@ unsigned int time_func() {
 - (void)SetTopic:(NSString *) topic
 {
     const char *topicChar=[topic UTF8String];
-    log_producer_config_set_topic(self->config, topicChar);
+    SetTopic(self->config, topicChar);
 }
 
-- (void)SetPacketLogBytes:(int) num
+- (void)SetPackageLogBytes:(int) num
 {
-    log_producer_config_set_packet_log_bytes(self->config, num);
+    SetPackageLogBytes(self->config, num);
 }
 
-- (void)SetPacketLogCount:(int) num
+- (void)SetPackageLogCount:(int) num
 {
-    log_producer_config_set_packet_log_count(self->config, num);
+    SetLogCountLimit(self->config, num);
 }
 
-- (void)SetPacketTimeout:(int) num
+- (void)SetPackageTimeout:(int) num
 {
-    log_producer_config_set_packet_timeout(self->config, num);
+    setPackageTimeout(self->config, num);
 }
 
 - (void)SetMaxBufferLimit:(int) num
 {
-    log_producer_config_set_max_buffer_limit(self->config, num);
+    SetMaxBufferLimit(self->config, num);
 }
 
 - (void)SetSendThreadCount:(int) num
 {
-    log_producer_config_set_send_thread_count(self->config, num);
+    set_send_thread_count(self->config, num);
 }
 
 - (void)SetConnectTimeoutSec:(int) num;
 {
-    log_producer_config_set_connect_timeout_sec(self->config, num);
+    SetConnectTtimeoutSec(self->config, num);
 }
 
 - (void)SetSendTimeoutSec:(int) num;
 {
-    log_producer_config_set_send_timeout_sec(self->config, num);
+    SetSendTimeoutSec(self->config, num);
 }
 
 - (void)SetDestroyFlusherWaitSec:(int) num;
 {
-    log_producer_config_set_destroy_flusher_wait_sec(self->config, num);
+    SetDestroyFlusherWaitSec(self->config, num);
 }
 
 - (void)SetDestroySenderWaitSec:(int) num;
 {
-    log_producer_config_set_destroy_sender_wait_sec(self->config, num);
+    SetDestroySenderWaitSec(self->config, num);
 }
 
 - (void)SetCompressType:(int) num;
 {
-    log_producer_config_set_compress_type(self->config, num);
-}
-
-- (int)IsValid;
-{
-    return log_producer_config_is_valid(self->config);
+    SetCompressType(self->config, num);
 }
 
 - (void)setAccessKeyId:(NSString *)accessKeyId
 {
-    log_producer_config_set_access_id(self->config, [accessKeyId UTF8String]);
+    SetAccessId(self->config, [accessKeyId UTF8String]);
 }
 
 - (void)setAccessKeySecret:(NSString *)accessKeySecret
 {
-    log_producer_config_set_access_key(self->config, [accessKeySecret UTF8String]);
+    SetAccessKey(self->config, [accessKeySecret UTF8String]);
 }
 
 + (void)Debug
 {
-    aos_log_set_level(AOS_LOG_DEBUG);
+    cls_log_set_level(CLS_LOG_DEBUG);
 }
 
 

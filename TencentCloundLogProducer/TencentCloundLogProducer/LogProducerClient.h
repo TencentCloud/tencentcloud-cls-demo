@@ -14,9 +14,8 @@ typedef void (^AddLogInterceptor)(Log *log);
 
 @interface LogProducerClient : NSObject
 {
-    @private log_producer* producer;
-    @private log_producer_client* client;
-    @private AddLogInterceptor addLogInterceptor;
+    @private clslogproducer* producer;
+    @private clslogproducerclient* client;
     @private BOOL enable;
 }
 
@@ -36,14 +35,14 @@ typedef NS_ENUM(NSInteger, LogProducerResult) {
     LogProducerPERSISTENT_Error = 99
 };
 
-- (id) initWithLogProducerConfig:(LogProducerConfig *)logProducerConfig;
+- (id) initWithClsLogProducer:(LogProducerConfig *)logProducerConfig;
 
-- (id) initWithLogProducerConfig:(LogProducerConfig *)logProducerConfig callback:(on_log_producer_send_done_function)callback;
+- (id) initWithClsLogProducer:(LogProducerConfig *)logProducerConfig callback:(SendCallBackFunc)callback;
 
 - (void)DestroyLogProducer;
 
-- (LogProducerResult)AddLog:(Log *) log;
+- (LogProducerResult)PostLog:(Log *) log;
 
-- (LogProducerResult)AddLog:(Log *) log flush:(int) flush;
+- (LogProducerResult)PostLog:(Log *) log flush:(int) flush;
 
 @end

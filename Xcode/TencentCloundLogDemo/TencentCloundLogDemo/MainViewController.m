@@ -11,11 +11,10 @@
 @implementation MainViewController
 
 - (void)viewDidLoad {
-    CLSLogV(@"调用viewDidLoad");
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"CLS iOS Demo";
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor systemBlueColor]];
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor systemGreenColor]];
 
     UIColor * color = [UIColor whiteColor];
     NSDictionary * dict = [NSDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
@@ -27,7 +26,6 @@
 
 - (void) initViews {
     self.view.backgroundColor = [UIColor whiteColor];
-    CLSLogV(@"初始化initViews配置");
     [self createButton:@"基本配置" andAction:@selector(gotoGeneralPage) andX: 0 andY: 0];
 
     [self createButton:@"销毁配置" andAction:@selector(gotoDestroyPage) andX: SLCellWidth + SLPadding andY: 0];

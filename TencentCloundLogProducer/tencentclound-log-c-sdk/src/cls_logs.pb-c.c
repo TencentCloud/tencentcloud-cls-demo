@@ -317,7 +317,7 @@ static const ProtobufCFieldDescriptor cls__log_group__field_descriptors[5] =
             1,
             PROTOBUF_C_LABEL_REPEATED,
             PROTOBUF_C_TYPE_MESSAGE,
-            offsetof(Cls__LogGroup, n_logs),
+            offsetof(Cls__LogGroup, logs_count),
             offsetof(Cls__LogGroup, logs),
             &cls__log__descriptor,
             NULL,
