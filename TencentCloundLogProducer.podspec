@@ -46,10 +46,9 @@ Pod::Spec.new do |s|
 }
 
   s.author             = { "herrylv" => "herrylv@tencent.com" }
-#  s.source       = { :git => "https://git.woa.com/cls_team/tencentcloud-cls-sdk-ios.git", :tag => s.version.to_s  }
   s.source       = { :git => "https://github.com/TencentCloud/tencentcloud-cls-demo.git", :tag => s.version.to_s  }
   s.social_media_url = 'http://t.cn/AiRpol8C'
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '8.0'
   s.default_subspec = 'Core'
 
   s.subspec 'Core' do |c|
@@ -65,12 +64,13 @@ Pod::Spec.new do |s|
           'TencentCloundLogProducer/TencentCloundLogProducer/*.h',
           'TencentCloundLogProducer/TencentCloundLogProducer/utils/*.h',
           'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_define.h',
-         'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_http_interface.h',
-         'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_inner_include.h',
-         'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_multi_thread.h',
-         'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_producer_client.h',
-         'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_producer_common.h',
-         'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_producer_config.h'
+          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_adaptor.h',
+          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_inner_include.h',
+          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_multi_thread.h',
+          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_producer_client.h',
+          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_error.h',
+          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/ProducerConfig.h',
+          'TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_producer_config.h'
 
   end
 end
