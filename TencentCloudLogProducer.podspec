@@ -48,7 +48,7 @@ Pod::Spec.new do |s|
   s.author             = { "herrylv" => "herrylv@tencent.com" }
   s.source       = { :git => "https://github.com/TencentCloud/tencentcloud-cls-demo.git", :tag => s.version.to_s  }
   s.social_media_url = 'http://t.cn/AiRpol8C'
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
   s.default_subspec = 'Core'
   s.static_framework = true
   s.subspec 'Core' do |c|
