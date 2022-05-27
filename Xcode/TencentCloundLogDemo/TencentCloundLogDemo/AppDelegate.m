@@ -3,7 +3,7 @@
 #import "UtilInfo.h"
 #import "MainViewController.h"
 
-#import <TencentCloundLogProducer/TencentCloundLogProducer.h>
+#import <TencentCloundLogProducer.h>
 @interface AppDelegate ()
 
 @end

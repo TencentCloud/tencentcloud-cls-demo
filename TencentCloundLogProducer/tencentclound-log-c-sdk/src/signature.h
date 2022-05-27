@@ -1,7 +1,7 @@
 #include "map.h"
-#include <hmac.h>
+#include <openssl/hmac.h>
 //#include <hmac.h>
-#include <sha.h>
+#include <openssl/sha.h>
 //#include <sha.h>
 #include <stdio.h>
 #include <string.h>

@@ -1,16 +1,23 @@
 PODS:
-  - TencentCloundLogProducer/Core (0.1.0)
+  - GMOpenSSL (2.2.6)
+  - TencentCloudLogProducer/Core (0.1.0):
+    - GMOpenSSL (~> 2.2.6)
 
 DEPENDENCIES:
-  - TencentCloundLogProducer/Core (from `../../`)
+  - TencentCloudLogProducer/Core (from `../../`)
+
+SPEC REPOS:
+  trunk:
+    - GMOpenSSL
 
 EXTERNAL SOURCES:
-  TencentCloundLogProducer:
+  TencentCloudLogProducer:
     :path: "../../"
 
 SPEC CHECKSUMS:
-  TencentCloundLogProducer: 98afd86d4da906f65d230d837c134deb256ce829
+  GMOpenSSL: 9a58d4bbae233579275605fb65f7d92fb01f3c06
+  TencentCloudLogProducer: 753fc761eea63de6edef5227ed56c7ed14878059
 
-PODFILE CHECKSUM: eb6ce5125d5b73051cddfd0c322bb99e18cea68c
+PODFILE CHECKSUM: 06f8352767923c071c18e94b3fc6bd82f7b28c2f
 
 COCOAPODS: 1.11.3

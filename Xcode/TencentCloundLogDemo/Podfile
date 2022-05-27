@@ -4,5 +4,5 @@
 target 'TencentCloundLogDemo' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  pod 'TencentCloundLogProducer/Core', :path =>'../../'
+  pod 'TencentCloudLogProducer/Core', :path =>'../../'
 end

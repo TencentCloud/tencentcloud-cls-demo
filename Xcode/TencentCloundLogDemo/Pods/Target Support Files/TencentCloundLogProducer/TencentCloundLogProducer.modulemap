@@ -1,6 +1,0 @@
-framework module TencentCloundLogProducer {
-  umbrella header "TencentCloundLogProducer-umbrella.h"
-
-  export *
-  module * { export * }
-}

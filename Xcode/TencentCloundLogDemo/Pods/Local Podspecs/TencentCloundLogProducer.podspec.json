@@ -12,7 +12,7 @@
     "herrylv": "herrylv@tencent.com"
   },
   "source": {
-    "git": "https://git.woa.com/cls_team/tencentcloud-cls-sdk-ios.git",
+    "git": "https://github.com/TencentCloud/tencentcloud-cls-demo.git",
     "tag": "0.1.0"
   },
   "social_media_url": "http://t.cn/AiRpol8C",
@@ -20,19 +20,15 @@
     "ios": "8.0"
   },
   "default_subspecs": "Core",
+  "static_framework": true,
   "subspecs": [
     {
       "name": "Core",
-      "vendored_libraries": [
-        "TencentCloundLogProducer/tencentclound-log-c-sdk/openssl/lib/libcrypto.a",
-        "TencentCloundLogProducer/tencentclound-log-c-sdk/openssl/lib/libssl.a",
-        "TencentCloundLogProducer/tencentclound-log-c-sdk/curl/lib/libcurl.a"
-      ],
+      "vendored_libraries": "TencentCloundLogProducer/tencentclound-log-c-sdk/curl/lib/libcurl.a",
       "source_files": [
         "TencentCloundLogProducer/TencentCloundLogProducer/*.{h,m}",
         "TencentCloundLogProducer/tencentclound-log-c-sdk/src/*.{c,h}",
         "TencentCloundLogProducer/tencentclound-log-c-sdk/curl/include/curl/*.{c,h}",
-        "TencentCloundLogProducer/tencentclound-log-c-sdk/openssl/include/openssl/*.{c,h}",
         "TencentCloundLogProducer/TencentCloundLogProducer/utils/*.{m,h}"
       ],
       "public_header_files": [
@@ -46,7 +42,12 @@
         "TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_error.h",
         "TencentCloundLogProducer/tencentclound-log-c-sdk/src/ProducerConfig.h",
         "TencentCloundLogProducer/tencentclound-log-c-sdk/src/log_producer_config.h"
-      ]
+      ],
+      "dependencies": {
+        "GMOpenSSL": [
+          "~> 2.2.6"
+        ]
+      }
     }
   ]
 }
