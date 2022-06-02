@@ -962,6 +962,40 @@
 			};
 			name = Release;
 		};
+		04FF87920BBD089055C47FE2C7790D21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FBD991BA092A8835642C649E5D0C537E /* TencentCloudLogProducer.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/TencentCloudLogProducer/TencentCloudLogProducer-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TencentCloudLogProducer/TencentCloudLogProducer-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/TencentCloudLogProducer/TencentCloudLogProducer.modulemap";
+				PRODUCT_MODULE_NAME = TencentCloudLogProducer;
+				PRODUCT_NAME = TencentCloudLogProducer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		7C609D48948D5D2AF4650EF6652DE0C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E2BD2573769902E3DA14CBFDDC770A3D /* GMOpenSSL.debug.xcconfig */;
@@ -1143,75 +1177,6 @@
 			};
 			name = Debug;
 		};
-		A99E47A9AFB87DBA5FA8E426B7EC5DDB /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 38B1E6209586D5F19D2F23EEFA13765D /* TencentCloudLogProducer.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/TencentCloudLogProducer/TencentCloudLogProducer-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/TencentCloudLogProducer/TencentCloudLogProducer-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/TencentCloudLogProducer/TencentCloudLogProducer.modulemap";
-				PRODUCT_MODULE_NAME = TencentCloudLogProducer;
-				PRODUCT_NAME = TencentCloudLogProducer;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		D514423BA77607ADCC1D805B72BDC740 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FBD991BA092A8835642C649E5D0C537E /* TencentCloudLogProducer.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/TencentCloudLogProducer/TencentCloudLogProducer-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/TencentCloudLogProducer/TencentCloudLogProducer-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/TencentCloudLogProducer/TencentCloudLogProducer.modulemap";
-				PRODUCT_MODULE_NAME = TencentCloudLogProducer;
-				PRODUCT_NAME = TencentCloudLogProducer;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		D6906E28A1735BACB1142D78EDEF3DAD /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B65BC2590C6EFA2E63C60581592CBC3C /* GMOpenSSL.release.xcconfig */;
@@ -1226,6 +1191,41 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DBB8151E00FB231E8296A0D7638E823F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38B1E6209586D5F19D2F23EEFA13765D /* TencentCloudLogProducer.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/TencentCloudLogProducer/TencentCloudLogProducer-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TencentCloudLogProducer/TencentCloudLogProducer-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/TencentCloudLogProducer/TencentCloudLogProducer.modulemap";
+				PRODUCT_MODULE_NAME = TencentCloudLogProducer;
+				PRODUCT_NAME = TencentCloudLogProducer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -1262,8 +1262,8 @@
 		E88E47A1E88D4ACB4D25DC6019AE3F03 /* Build configuration list for PBXNativeTarget "TencentCloudLogProducer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D514423BA77607ADCC1D805B72BDC740 /* Debug */,
-				A99E47A9AFB87DBA5FA8E426B7EC5DDB /* Release */,
+				04FF87920BBD089055C47FE2C7790D21 /* Debug */,
+				DBB8151E00FB231E8296A0D7638E823F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
