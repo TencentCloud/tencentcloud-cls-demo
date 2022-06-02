@@ -22,13 +22,13 @@
 ### import
 
 ```
-#import <TencentCloundLogProducer/TencentCloundLogProducer.h>
+#import <TencentCloundLogProducer.h>
 ```
 
 ### Podfile
 
 ```
-pod 'TencentCloundLogProducer'
+pod 'TencentCloudLogProducer'
 ```
 
 ### 配置
