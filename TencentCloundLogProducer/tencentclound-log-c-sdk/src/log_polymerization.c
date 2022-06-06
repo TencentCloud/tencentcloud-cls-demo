@@ -442,6 +442,7 @@ void InnerAddLog(log_group_builder *bder, uint32_t logTime,
     }
     cls_log.n_contents = pair_count;
     cls_log.contents = content;
+    cls_log.time = time(NULL);
     //序列化
     unsigned len = cls__log__get_packed_size(&cls_log);
     void *logs_buf = malloc(len);
