@@ -10,6 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSString *accessKeyId;
 @property(nonatomic, strong) NSString *accessKeySecret;
 @property(nonatomic, strong) NSString *topic;
+@property(nonatomic, strong) NSString *accessToken;
 
 + (instancetype) sharedInstance;
 

@@ -120,11 +120,13 @@ void *SendProcess(void *param)
         sds accessKeyId = NULL;
         sds accessKey = NULL;
         sds topic = NULL;
-        GetBaseInfo(config, &accessKeyId, &accessKey, &topic);
-        post_result *rst = PostLogsWithLz4(config->endpoint, accessKeyId, accessKey, topic, send_buf, &option);
+        sds token = NULL;
+        GetBaseInfo(config, &accessKeyId, &accessKey, &topic,&token);
+        post_result *rst = PostLogsWithLz4(config->endpoint, accessKeyId, accessKey, topic, send_buf,token, &option);
         sdsfree(accessKeyId);
         sdsfree(accessKey);
         sdsfree(topic);
+        sdsfree(token);
         int32_t sleepMs = AfterProcess(send_param, rst, &error_info);
         post_log_result_destroy(rst);
 

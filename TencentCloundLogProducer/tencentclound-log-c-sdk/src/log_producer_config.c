@@ -69,6 +69,15 @@ void DestroyClsLogProducerConfig(ProducerConfig *pConfig)
     {
         sdsfree(pConfig->topic);
     }
+    if (pConfig->secToken != NULL)
+    {
+       sdsfree(pConfig->secToken);
+    }
+    if (pConfig->secTokenLock != NULL)
+    {
+       pthread_mutex_destroy(pConfig->secTokenLock);
+       free(pConfig->secTokenLock);
+    }
     if (pConfig->source != NULL)
     {
         sdsfree(pConfig->source);
@@ -220,11 +229,31 @@ void SetAccessKey(ProducerConfig *config, const char *access_key)
     _copy_config_string(access_key, &config->accessKey);
 }
 
-void GetBaseInfo(ProducerConfig *config, char **access_id, char **access_secret, char **topic)
+void resetSecurityToken(ProducerConfig * config, const char * security_token){
+    if (config->secTokenLock == NULL)
+    {
+        config->secTokenLock = InitMutex();
+    }
+    pthread_mutex_lock(config->secTokenLock);
+    _copy_config_string(security_token, &config->secToken);
+    pthread_mutex_unlock(config->secTokenLock);
+}
+
+void GetBaseInfo(ProducerConfig *config, char **access_id, char **access_secret, char **topic,char **sec_token)
 {
-    _copy_config_string(config->accessKeyId, access_id);
-    _copy_config_string(config->accessKey, access_secret);
-    _copy_config_string(config->topic, topic);
+    if(config->secTokenLock == NULL){
+        _copy_config_string(config->accessKeyId, access_id);
+        _copy_config_string(config->accessKey, access_secret);
+        _copy_config_string(config->topic, topic);
+    }else{
+        pthread_mutex_lock(config->secTokenLock);
+        _copy_config_string(config->accessKeyId, access_id);
+        _copy_config_string(config->accessKey, access_secret);
+        _copy_config_string(config->topic, topic);
+        _copy_config_string(config->secToken, sec_token);
+        pthread_mutex_unlock(config->secTokenLock);
+    }
+
 }
 
 void SetTopic(ProducerConfig *config, const char *topic)

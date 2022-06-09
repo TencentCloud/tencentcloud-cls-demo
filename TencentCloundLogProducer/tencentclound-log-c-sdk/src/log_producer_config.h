@@ -18,8 +18,9 @@ typedef struct _log_producer_config {
   char *accessKeyId;
   char *accessKey;
   char *topic;
+  char *secToken;
   char *source;
-
+  pthread_mutex_t* secTokenLock;
   int32_t sendThreadCount;
 
   int32_t packageTimeoutInMS;
@@ -44,11 +45,12 @@ typedef struct _log_producer_config {
 
  void SetAccessKey(ProducerConfig *config,const char *access_id);
 
- void GetBaseInfo(ProducerConfig *config,char **access_id,
-                   char **access_secret,char **topic);
+ void resetSecurityToken(ProducerConfig * config,const char * security_token);
 
- void SetTopic(ProducerConfig *config,
-                                              const char *topic);
+void GetBaseInfo(ProducerConfig *config,char **access_id,
+                  char **access_secret,char **topic,char **sec_token);
+
+ void SetTopic(ProducerConfig *config,const char *topic);
 
  void SetSource(ProducerConfig *config,const char *source);
 

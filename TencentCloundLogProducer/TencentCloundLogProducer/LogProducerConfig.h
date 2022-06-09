@@ -18,6 +18,8 @@
 
 - (id) initWithCoreInfo:(NSString *) endpoint accessKeyID:(NSString *)accessKeyID accessKeySecret:(NSString *)accessKeySecret;
 
+- (id) initWithCoreInfo:(NSString *) endpoint accessKeyID:(NSString *)accessKeyID accessKeySecret:(NSString *)accessKeySecret securityToken:(NSString *)securityToken;
+
 - (void)SetTopic:(NSString *) topic;
 
 - (void)SetPackageLogBytes:(int) num;
@@ -47,6 +49,8 @@
 - (void) setAccessKeyId: (NSString *)accessKeyId;
 
 - (void) setAccessKeySecret: (NSString *) accessKeySecret;
+
+- (void) ResetSecurityToken:(NSString *)securityToken;
 
 + (void) Debug;
 

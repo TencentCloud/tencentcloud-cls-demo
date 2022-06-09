@@ -94,7 +94,7 @@ void GetQueryString(const root_t parameterList,
 }
 
 
-post_result *PostLogsWithLz4(const char *endpoint, const char *accesskeyId, const char *accessKey, const char *topic,lz4_content *buffer, log_post_option *option)
+post_result *PostLogsWithLz4(const char *endpoint, const char *accesskeyId, const char *accessKey, const char *topic,lz4_content *buffer, const char *token, log_post_option *option)
 {
     const char *operation = "/structuredlog";
     root_t httpHeader = RB_ROOT;
@@ -114,6 +114,9 @@ post_result *PostLogsWithLz4(const char *endpoint, const char *accesskeyId, cons
     signature(accesskeyId, accessKey, "POST", operation, params, httpHeader, 300, c_signature);
     put(&httpHeader, "Authorization", c_signature);
 
+    if(token != NULL){
+        put(&httpHeader, "X-Cls-Token", token);
+    }
     sds queryString = sdsnewEmpty(1024);
     GetQueryString(params, queryString);
 
@@ -213,7 +216,6 @@ post_result *PostLogsWithLz4(const char *endpoint, const char *accesskeyId, cons
 
         curl_slist_free_all(headers); /* free the list again */
         sdsfree(queryString);
-        sdsfree(body);
         sdsfree(queryUrl);
         curl_easy_cleanup(curl);
 

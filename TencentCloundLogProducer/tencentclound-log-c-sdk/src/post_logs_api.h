@@ -26,6 +26,7 @@ post_result *PostLogsWithLz4(const char *endpoint,
                                        const char *accesskeyId,
                                        const char *accessKey, const char *topic,
                                        lz4_content *buffer,
+                                       const char *token,
                                        log_post_option *option);
 
 void post_log_result_destroy(post_result *result);

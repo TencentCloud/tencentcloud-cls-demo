@@ -22,16 +22,29 @@
 {
     if (self = [super init])
     {
+        self = [self initWithCoreInfo:endpoint accessKeyID:accessKeyID accessKeySecret:accessKeySecret securityToken:nil];
+    }
+
+    return self;
+}
+
+- (id) initWithCoreInfo:(NSString *) endpoint accessKeyID:(NSString *)accessKeyID accessKeySecret:(NSString *)accessKeySecret securityToken:(NSString *)securityToken{
+    if (self = [super init])
+    {
         self->config = ConstructLogConfig();
         setPackageTimeout(self->config, 3000);
         SetLogCountLimit(self->config, 1024);
         SetPackageLogBytes(self->config, 1024*1024);
         set_send_thread_count(self->config, 1);
         SetTimeUnixFunc(time_func);
-
+ 
         [self setEndpoint:endpoint];
         [self setAccessKeyId:accessKeyID];
         [self setAccessKeySecret:accessKeySecret];
+        
+        if([securityToken length] != 0){
+            [self ResetSecurityToken:securityToken];
+        }
     }
 
     return self;
@@ -117,6 +130,14 @@ unsigned int time_func() {
 - (void)setAccessKeySecret:(NSString *)accessKeySecret
 {
     SetAccessKey(self->config, [accessKeySecret UTF8String]);
+}
+
+
+- (void) ResetSecurityToken:(NSString *)securityToken{
+    if ([securityToken length] == 0) {
+        return;
+    }
+    resetSecurityToken(self->config,[securityToken UTF8String]);
 }
 
 + (void)Debug
