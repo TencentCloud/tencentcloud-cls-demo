@@ -26,7 +26,12 @@
          ClsLogProducerInit(LOG_GLOBAL_ALL);
         self->producer = ConstructorClsLogProducer(logProducerConfig->config, *callback, nil);
         self->client = GetClsLogProducer(self->producer, nil);
-        enable = YES;
+        if(self->client == NULL){
+            enable = false;
+        }else{
+            enable = YES;
+        }
+        
     }
 
     return self;
