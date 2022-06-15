@@ -46,20 +46,7 @@ class ViewController: UIViewController {
         config.setDestroySenderWaitSec(1)
         config.setCompressType(1)
         let tv = self.resText;
-        
-//        func callbackFunc(config_name: UnsafePointer<CChar>?, result: Int32, log_bytes:Int, compressed_bytes:Int, req_id:UnsafePointer<CChar>?, error_message:UnsafePointer<CChar>?, raw_buffer:UnsafePointer<UInt8>?, _: UnsafeMutableRawPointer?) -> Void{
-//            let res = LogProducerResult(rawValue: Int(result))
-//            let reqId = req_id == nil ? "":String(cString: req_id!)
-//            let topic_id = config_name == nil ? "":String(cString: config_name!)
-//            if(result == LOG_PRODUCER_OK){
-//                let success = "send success, topic :\(topic_id), result : \(result), log bytes : \(log_bytes), compressed bytes : \(compressed_bytes), request id : \(reqId)"
-//                print(success)
-//                tv?.text = success;
-//            }else{
-//                let fail = "send fail, topic :\(topic_id), result : \(result), log bytes : \(log_bytes), compressed bytes : \(compressed_bytes), request id : \(reqId)"
-//                print(fail)
-//            }
-//        }
+
         let callbackFunc: SendCallBackFunc =  {config_name,result,log_bytes,compressed_bytes,req_id,error_message,raw_buffer,user_param in
             let res = LogProducerResult(rawValue: Int(result))
             let reqId = req_id == nil ? "":String(cString: req_id!)
@@ -72,6 +59,7 @@ class ViewController: UIViewController {
             }else{
                 let fail = "send fail, topic :\(topic_id), result : \(result), log bytes : \(log_bytes), compressed bytes : \(compressed_bytes), request id : \(reqId)"
                 print(fail)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "test"), object: fail);
             }
         }
             self.client = LogProducerClient(clsLogProducer:config, callback:callbackFunc)
