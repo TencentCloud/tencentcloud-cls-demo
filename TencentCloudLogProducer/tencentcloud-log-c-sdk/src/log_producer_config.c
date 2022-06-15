@@ -309,12 +309,11 @@ int is_valid(ProducerConfig *config)
     if (config->endpoint == NULL)
     {
         cls_error_log("invalid producer config destination params");
-        //        return 0;
+        return 0;
     }
     if (config->accessKey == NULL || config->accessKeyId == NULL)
     {
         cls_error_log("invalid producer config authority params");
-        //        return 0;
     }
     if (config->packageTimeoutInMS < 0 || config->maxBufferBytes < 0 || config->logCountPerPackage < 0 || config->logBytesPerPackage < 0)
     {
