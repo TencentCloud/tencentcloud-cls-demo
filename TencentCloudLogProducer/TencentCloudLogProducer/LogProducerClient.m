@@ -82,6 +82,8 @@
         
         ids = ids + 1;
     }
+    
+    
     int res = PostClsLog(self->client, log->logTime, pairCount, keyArray, keyCountArray, valueArray, valueCountArray, flush);
     
     for(int i=0;i<pairCount;i++) {

@@ -103,7 +103,7 @@ extern clslogproducerclient *GetClsLogProducer(clslogproducer *producer, const c
 
 int
 PostClsLog(clslogproducerclient *client,
-                                                uint32_t time_sec,
+           int64_t logtime,
                                                 int32_t pair_count, char **keys,
                                                 int32_t *key_lens, char **values,
                                                 int32_t *value_lens, int flush)
@@ -114,5 +114,5 @@ PostClsLog(clslogproducerclient *client,
     }
 
     ProducerManager *manager = ((PrivateProducerClient *)client->private_client)->producermgr;
-    return log_producer_manager_add_log_int32(manager, pair_count, keys, key_lens, values, value_lens, flush, -1);
+    return log_producer_manager_add_log(manager, logtime,pair_count, keys, key_lens, values, value_lens, flush, -1);
 }

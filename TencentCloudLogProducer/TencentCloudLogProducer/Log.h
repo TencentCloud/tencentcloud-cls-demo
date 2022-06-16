@@ -8,7 +8,7 @@
 
 @interface Log : NSObject
 {
-    @package unsigned int logTime;
+    @package uint64_t logTime;
     @package NSMutableDictionary *content;
 }
 

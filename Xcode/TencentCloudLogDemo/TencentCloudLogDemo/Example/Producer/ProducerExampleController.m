@@ -110,6 +110,7 @@ static void log_send_callback(const char * config_name, int result, size_t log_b
     [log PutContent:@"content_key_9" value:@"9abcdefghijklmnopqrstuvwxyz0123456789"];
     [log PutContent:@"content" value:@"中文"];
 
+//    [log SetTime:[[NSDate date] timeIntervalSince1970]*1000];
     return log;
 }
 

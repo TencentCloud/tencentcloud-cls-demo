@@ -44,7 +44,8 @@ ConstructorProducerManager(ProducerConfig *producerconf);
 extern void destroy_log_producer_manager(ProducerManager *manager);
 
 extern int
-log_producer_manager_add_log_int32(ProducerManager *producermgr,
+log_producer_manager_add_log(ProducerManager *producermgr,
+                                   int64_t logtime,
                                    int32_t pair_count, char **keys,
                                    int32_t *key_lens, char **values,
                                    int32_t *val_lens, int flush, int64_t uuid);

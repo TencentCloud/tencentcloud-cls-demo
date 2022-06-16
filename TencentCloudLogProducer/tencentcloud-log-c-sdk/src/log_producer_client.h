@@ -31,7 +31,7 @@ void DestructorClsLogProducer(clslogproducer *producer);
 clslogproducerclient *
 GetClsLogProducer(clslogproducer *producer, const char *config_name);
 
- int PostClsLog(clslogproducerclient *client, uint32_t time_sec, int32_t pair_count,
+ int PostClsLog(clslogproducerclient *client, int64_t time, int32_t pair_count,
     char **keys, int32_t *key_lens, char **values, int32_t *value_lens,
     int flush);
 
