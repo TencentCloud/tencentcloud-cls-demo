@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <assert.h>
+#include <sys/time.h>
 
 // 1+3( 1 --->  header;  2 ---> 128 * 128 = 16KB)
 #define INIT_LOG_SIZE_BYTES 3
@@ -201,12 +202,6 @@ void add_log_raw(log_group_builder *bder, const char *buffer, size_t size)
 void add_log_full(log_group_builder *bder, uint32_t logTime, int32_t pair_count, char **keys, size_t *key_lens, char **values, size_t *val_lens)
 {
     ++bder->grp->logs_count;
-
-    // limit logTime's min value, ensure varint size is 5
-    if (logTime < 1263563523)
-    {
-        logTime = 1263563523;
-    }
 
     int32_t i = 0;
     int32_t logSize = 6;
@@ -424,7 +419,7 @@ void FreeLogBuf(lz4_content *pBuf)
 
 #ifdef LOG_KEY_VALUE_FLAG
 
-void InnerAddLog(log_group_builder *bder, uint32_t logTime,
+void InnerAddLog(log_group_builder *bder, int64_t logTime,
                         int32_t pair_count, char **keys, int32_t *key_lens,
                         char **values, int32_t *val_lens)
 {
@@ -442,7 +437,12 @@ void InnerAddLog(log_group_builder *bder, uint32_t logTime,
     }
     cls_log.n_contents = pair_count;
     cls_log.contents = content;
-    cls_log.time = time(NULL);
+    cls_log.time = logTime;
+    if(cls_log.time == 0){
+        struct timeval t;
+        gettimeofday(&t, 0);
+        cls_log.time = (long)((long)t.tv_sec * 1000 + t.tv_usec/1000);
+    }
     //序列化
     unsigned len = cls__log__get_packed_size(&cls_log);
     void *logs_buf = malloc(len);

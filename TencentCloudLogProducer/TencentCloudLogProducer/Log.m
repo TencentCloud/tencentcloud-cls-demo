@@ -14,7 +14,7 @@
 {
     if (self = [super init])
     {
-        self->logTime = [TimeUtils getTimeInMilliis];
+        self->logTime = 0;
         self->content = [NSMutableDictionary dictionary];
 
     }
@@ -34,9 +34,9 @@
     return self->content;
 }
 
-- (void)SetTime:(unsigned int) logTime
+- (void)SetTime:(int64_t) time
 {
-    self->logTime = logTime;
+    self->logTime = time;
 }
 
 - (unsigned int)getTime

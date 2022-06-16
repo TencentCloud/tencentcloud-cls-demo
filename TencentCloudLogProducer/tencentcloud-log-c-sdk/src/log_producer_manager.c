@@ -416,14 +416,15 @@ void destroy_log_producer_manager(ProducerManager *manager)
     return ret;
 
 int
-log_producer_manager_add_log_int32(ProducerManager *producermgr,
+log_producer_manager_add_log(ProducerManager *producermgr,
+                                   int64_t logtime,
                                    int32_t pair_count, char **keys,
                                    int32_t *key_lens, char **values,
                                    int32_t *val_lens, int flush, int64_t uuid)
 {
     LOG_PRODUCER_MANAGER_ADD_LOG_BEGIN;
 
-    InnerAddLog(producermgr->builder, (uint32_t)time(NULL), pair_count, keys, key_lens, values, val_lens);
+    InnerAddLog(producermgr->builder, logtime, pair_count, keys, key_lens, values, val_lens);
 
     LOG_PRODUCER_MANAGER_ADD_LOG_END;
 }

@@ -54,8 +54,7 @@ SerializeWithNolz4(log_group_builder *bder);
 extern void FreeLogBuf(lz4_content *pBuf);
 extern log_group_builder *GenerateLogGroup();
 extern void log_group_destroy(log_group_builder *bder);
-
-extern void InnerAddLog(log_group_builder *bder, uint32_t logTime,
+extern void InnerAddLog(log_group_builder *bder, int64_t logTime,
                                int32_t pair_count, char **keys,
                                int32_t *key_lens, char **values,
                                int32_t *val_lens);
