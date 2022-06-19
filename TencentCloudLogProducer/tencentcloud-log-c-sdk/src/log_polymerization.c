@@ -367,8 +367,19 @@ lz4_content *SerializeWithNolz4(log_group_builder *bder)
     pLogbuf->length = len;
     pLogbuf->raw_length = len;
     memcpy(pLogbuf->data, group_list_buf, len);
+    free(group_list_buf);
+
+    int i = 0;
+    for (; i < log_count; ++i)
+    {
+        cls__log__free_unpacked(pcls_log[i],NULL);
+    }
+    free(pcls_log);
+    free(loggroups[0]);
+    free(loggroups);
     return pLogbuf;
 }
+
 lz4_content *SerializeWithlz4(log_group_builder *bder)
 {
 
