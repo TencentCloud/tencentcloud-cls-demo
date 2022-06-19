@@ -180,11 +180,11 @@ int32_t AfterProcess(ProducerConfig *config,log_producer_send_param *send_param,
         }
         else
         {
-            if (error_info->last_sleep_ms <= config->maxRetryBackoffMs)
+            if (error_info->last_sleep_ms < config->maxRetryBackoffMs)
             {
                 error_info->last_sleep_ms = config->baseRetryBackoffMs + pow(2, error_info->retryCount);
             }
-            if (error_info->retryCount > config->retries || error_info->last_sleep_ms > config->maxRetryBackoffMs)
+            if (error_info->retryCount >= config->retries || error_info->last_sleep_ms >= config->maxRetryBackoffMs)
             {
                 break;
             }
