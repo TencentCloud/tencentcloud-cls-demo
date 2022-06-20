@@ -134,10 +134,18 @@ void log_group_destroy(log_group_builder *bder)
     {
         free(group->tags.buffer);
     }
+    if (group->tags.buf_index != NULL)
+    {
+        free(group->tags.buf_index);
+    }
     // free log
     if (group->logs.buffer != NULL)
     {
         free(group->logs.buffer);
+    }
+    if (group->logs.buf_index != NULL)
+    {
+        free(group->logs.buf_index);
     }
     if (group->topic != NULL)
     {
@@ -147,7 +155,6 @@ void log_group_destroy(log_group_builder *bder)
     {
         sdsfree(group->source);
     }
-    // free self
     free(bder);
 }
 
@@ -164,6 +171,8 @@ void _adjust_buffer(log_buffer *tag, uint32_t new_len)
         tag->max_buffer_len = new_len << 2;
         tag->now_buffer = tag->buffer;
         tag->now_buffer_len = 0;
+        tag->buf_index = (int*)malloc(new_len << 2);
+        memset(tag->buf_index,0,new_len << 2);
         return;
     }
     uint32_t new_buffer_len = tag->max_buffer_len << 1;
@@ -174,6 +183,7 @@ void _adjust_buffer(log_buffer *tag, uint32_t new_len)
     }
 
     tag->buffer = (char *)realloc(tag->buffer, new_buffer_len);
+    tag->buf_index = (int*)realloc(tag->buf_index, new_buffer_len);
     tag->now_buffer = tag->buffer + tag->now_buffer_len;
     tag->max_buffer_len = new_buffer_len;
 }
@@ -331,18 +341,22 @@ static uint32_t _log_pack(log_group *grp, uint8_t *buf)
 lz4_content *SerializeWithNolz4(log_group_builder *bder)
 {
     log_buffer *log = &(bder->grp->logs);
-    Cls__Log *pcls_log = cls__log__unpack(NULL, log->now_buffer_len, log->buffer);
-    if (pcls_log == NULL)
-    {
-        return NULL;
+    int log_count =bder->grp->logs_count;
+    Cls__Log **pcls_log = (Cls__Log **)malloc(sizeof(Cls__Log *) * bder->grp->logs_count);
+    for(int i = 0; i < bder->grp->logs_count; ++i){
+        pcls_log[i] = (Cls__Log *)malloc(sizeof(Cls__Log));
+        pcls_log[i] = cls__log__unpack(NULL, (log->buf_index)[i], log->buffer);
+        if(pcls_log[i] == NULL){
+            return NULL;
+        }
     }
 
     Cls__LogGroupList pbLogGroup = CLS__LOG_GROUP_LIST__INIT;
     Cls__LogGroup **loggroups = malloc(sizeof(Cls__LogGroup *));
     loggroups[0] = malloc(sizeof(Cls__LogGroup));
     cls__log_group__init(loggroups[0]);
-    loggroups[0]->logs_count = 1;
-    loggroups[0]->logs = &pcls_log;
+    loggroups[0]->logs_count = bder->grp->logs_count;;
+    loggroups[0]->logs = pcls_log;
     pbLogGroup.loggrouplist = loggroups;
     pbLogGroup.n_loggrouplist = 1;
     unsigned len = cls__log_group_list__get_packed_size(&pbLogGroup);
@@ -353,27 +367,39 @@ lz4_content *SerializeWithNolz4(log_group_builder *bder)
     pLogbuf->length = len;
     pLogbuf->raw_length = len;
     memcpy(pLogbuf->data, group_list_buf, len);
+    free(group_list_buf);
+
+    int i = 0;
+    for (; i < log_count; ++i)
+    {
+        cls__log__free_unpacked(pcls_log[i],NULL);
+    }
+    free(pcls_log);
+    free(loggroups[0]);
+    free(loggroups);
     return pLogbuf;
 }
 
 lz4_content *SerializeWithlz4(log_group_builder *bder)
 {
-    /*
-    数据协议转换，解析成protobuf的格式进行发送
-    */
+
     log_buffer *log = &(bder->grp->logs);
-    Cls__Log *pcls_log = cls__log__unpack(NULL, log->now_buffer_len, log->buffer);
-    if (pcls_log == NULL)
-    {
-        return NULL;
+    int log_count =bder->grp->logs_count;
+    Cls__Log **pcls_log = (Cls__Log **)malloc(sizeof(Cls__Log *) * bder->grp->logs_count);
+    for(int i = 0; i < bder->grp->logs_count; ++i){
+        pcls_log[i] = (Cls__Log *)malloc(sizeof(Cls__Log));
+        pcls_log[i] = cls__log__unpack(NULL, (log->buf_index)[i], log->buffer);
+        if(pcls_log[i] == NULL){
+            return NULL;
+        }
     }
 
     Cls__LogGroupList pbLogGroup = CLS__LOG_GROUP_LIST__INIT;
     Cls__LogGroup **loggroups = malloc(sizeof(Cls__LogGroup *));
     loggroups[0] = malloc(sizeof(Cls__LogGroup));
     cls__log_group__init(loggroups[0]);
-    loggroups[0]->logs_count = 1;
-    loggroups[0]->logs = &pcls_log;
+    loggroups[0]->logs_count = bder->grp->logs_count;;
+    loggroups[0]->logs = pcls_log;
     pbLogGroup.loggrouplist = loggroups;
     pbLogGroup.n_loggrouplist = 1;
     unsigned len = cls__log_group_list__get_packed_size(&pbLogGroup);
@@ -398,12 +424,22 @@ lz4_content *SerializeWithlz4(log_group_builder *bder)
     pLogbuf->raw_length = len;
     memcpy(pLogbuf->data, compress_data, compressed_size);
     free(compress_data);
-    cls__log__free_unpacked(pcls_log, NULL);
     free(group_list_buf);
+
+    int i = 0;
+    for (; i < log_count; ++i)
+    {
+        cls__log__free_unpacked(pcls_log[i],NULL);
+    }
+    free(pcls_log);
     free(loggroups[0]);
     free(loggroups);
+
+
     return pLogbuf;
 }
+
+
 
 void FreeLogBuf(lz4_content *pBuf)
 {
@@ -416,10 +452,10 @@ void InnerAddLog(log_group_builder *bder, int64_t logTime,
                         int32_t pair_count, char **keys, int32_t *key_lens,
                         char **values, int32_t *val_lens)
 {
-    ++bder->grp->logs_count;
+    
 
-    Cls__Log cls_log = CLS__LOG__INIT;                                              
-    Cls__Log__Content **content = malloc(sizeof(Cls__Log__Content *) * pair_count); 
+    Cls__Log cls_log = CLS__LOG__INIT;
+    Cls__Log__Content **content = malloc(sizeof(Cls__Log__Content *) * pair_count);
     int i = 0;
     for (; i < pair_count; ++i)
     {
@@ -457,6 +493,7 @@ void InnerAddLog(log_group_builder *bder, int64_t logTime,
     buf += logSize;
 
     assert(buf - (uint8_t *)log->now_buffer == totalBufferSize);
+    log->buf_index[bder->grp->logs_count++] = totalBufferSize;
     log->now_buffer_len += totalBufferSize;
     log->now_buffer = (char *)buf;
 
@@ -469,5 +506,6 @@ void InnerAddLog(log_group_builder *bder, int64_t logTime,
     }
     free(content);
 }
+
 
 #endif

@@ -16,6 +16,7 @@ typedef struct {
   char *now_buffer;
   uint32_t max_buffer_len;
   uint32_t now_buffer_len;
+    int *buf_index;
 } log_buffer;
 
 typedef struct {
