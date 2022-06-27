@@ -74,6 +74,14 @@ Pod::Spec.new do |s|
           'TencentCloudLogProducer/tencentCloud-log-c-sdk/src/log_producer_config.h'
           
           c.dependency 'GMOpenSSL', '~> 2.2.6'
-
+  end
+  s.subspec 'NetWorkDiagnosis' do |b|
+      b.dependency 'TencentCloudLogProducer/Core'
+      b.source_files =
+      'TencentCloudLogProducer/TencentCloudLogProducer/NetWorkDiagnosis/*.{m,h}'
+      b.public_header_files =
+      'TencentCloudLogProducer/TencentCloudLogProducer/NetWorkDiagnosis/*.h',
+      b.frameworks = "SystemConfiguration"
+      b.dependency 'Reachability', '~> 3.2'
   end
 end
