@@ -54,6 +54,23 @@
           "~> 2.2.6"
         ]
       }
+    },
+    {
+      "name": "NetWorkDiagnosis",
+      "dependencies": {
+        "TencentCloudLogProducer/Core": [
+
+        ],
+        "Reachability": [
+          "~> 3.2"
+        ]
+      },
+      "source_files": "TencentCloudLogProducer/TencentCloudLogProducer/NetWorkDiagnosis/*.{m,h}",
+      "frameworks": "SystemConfiguration",
+      "public_header_files": [
+        "TencentCloudLogProducer/TencentCloudLogProducer/NetWorkDiagnosis/*.h",
+        "SystemConfiguration"
+      ]
     }
   ]
 }
